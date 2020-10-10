@@ -23,27 +23,27 @@ module.exports = (sequelize, dataTypes) => {
             unique:true,
         },
         password:{
-            type:dataTypes.STRING(100),
+            type:dataTypes.STRING(45),
             allowNull:false
         },
-        fecha:{
-            type:dataTypes.DATEONLY()
-        },
+        
         avatar:{
-            type:dataTypes.STRING(45)
+            type:dataTypes.STRING(45),
+            allowNull:false
         },
-        domicilio:{
-            type:dataTypes.STRING(255)
+        direccion:{
+            type:dataTypes.STRING(45),
+            allowNull:false
         },
         ciudad:{
-            type:dataTypes.STRING(255)
+            type:dataTypes.STRING(45),
+            allowNull:false
         },
         provincia:{
-            type:dataTypes.STRING(100)
+            type:dataTypes.STRING(45),
+            allowNull:false
         },
-        rol:{
-            type:dataTypes.STRING(45)
-        }
+        
     }
     let config = {
         tableName: "users",

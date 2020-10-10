@@ -9,12 +9,11 @@ module.exports = (sequelize, dataTypes) => {
         },
         nombre:{
             type:dataTypes.STRING(105),
-            allowNull:false
+            allowNull:false,
+            primaryKey:true
         },
-        imagen:{
-            type:dataTypes.STRING(45),
-            allowNull:false
-        }
+        
+        
     }
     let config = {
         tablaName: "categories",
