@@ -2,12 +2,15 @@ const dbproductos = require('../data/productos.json');
 const fs = require('fs');
 const path = require('path');
 
+const db = require("../database/models");
+const { where } = require('sequelize');
 
 const productsController = {
     listar: function(req, res) {
-        res.render('products', {
-                title: "Todos los Productos",
-                productos: dbproductos
+        db.products.findAll()
+        .them(productos=>{
+            res.send(productos)
+
             })
     },
     productsDetail: function (req, res) {
@@ -22,29 +25,35 @@ const productsController = {
         }) 
     },
     agregar: function (req, res) {
-        res.render('productAdd')
-    },
-    add:function(req,res,next){
-        let lastID = 1;
-        dbproductos.forEach(producto=>{
-            if(producto.id > lastID){
-                lastID = producto.id
-            }
+       db.categories.findAll()
+        .them(categorias => {
+           res.render('productAdd',{
+    title:"agregar producto",
+    categorias:categorias
         })
-        let newProduct = {
-            id:lastID + 1,
-            name:req.body.name,
-            description:req.body.description,
-            imagen:req.body.imagen,
-            category:req.body.category,
-            price:req.body.price,
-        }
-        dbproductos.push(newProduct);
-        
-        fs.writeFileSync(path.join(__dirname,"..","data","productos.json"),JSON.stringify(dbproductos),'utf-8')
-
-        res.redirect('/')
+        })
 },
+    add:function(req,res,next){
+       db.users.findOne({
+           where:{
+               id:req.session.user.id
+           },
+           })
+        }
+    .then(users =>{
+        db.products.add({   
+            nombre:req.body.nombre.trim(),
+            precio:Number(req.body.precio),
+            descripcion:req.body.descripcion,
+            imagenes:req.file[0].filename,
+           id_categories:Number(req.body.categories)
+        })
+    })
+
+.catch(error =>{
+    res.send(error)
+}),
+
 show:function(req,res){
     let idProducto = req.params.id;
     let resultado = dbproductos.filter(producto=>{
