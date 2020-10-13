@@ -8,24 +8,23 @@ module.exports = (sequelize, dataTypes) => {
             primaryKey:true
         },
         nombre:{
-            type:dataTypes.STRING(105),
+            type:dataTypes.STRING(45),
             allowNull:false,
-            primaryKey:true
+            
         },
-        
-        
-    }
+        imagen:{
+            type:dataTypes.STRING(45),
+            allowNull:false,
+                    
+    },
+}
     let config = {
         tablaName: "categories",
         timestamps:false
     }
     const Categorie = sequelize.define(alias,cols,config);
 
-    Categorie.associate = function(models){
-        Categorie.hasMany(models.Products,{
-            as:"productos",
-            foreignKey:"id_categoria"
-        })
-    }
+
+    
     return Categorie;
 }

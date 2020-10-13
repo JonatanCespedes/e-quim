@@ -20,11 +20,15 @@ module.exports = (sequelize, dataTypes) => {
             type:dataTypes.STRING(300),
             allowNull:false
         },
-        imagenes:{
-            type:dataTypes.STRING(100),
+        imagen:{
+            type:dataTypes.STRING(45),
             allowNull:false
-        }
-    }
+        },
+        id_categorias:{
+            type:dataTypes.INTEGER(11),
+            allowNull:false
+    },
+}
 
     let config = {
         tableName  : "products",
@@ -32,6 +36,15 @@ module.exports = (sequelize, dataTypes) => {
         underscored: true
     }
     const Product = sequelize.define(alias,cols,config)
+
+    Categorie.associate = function(models){
+        Categorie.hasMany(models.Products,{
+            as:"categories",
+            foreignKey:"id_categoria",
+        
+        })
+    }
+
 
     return Product;
 }
