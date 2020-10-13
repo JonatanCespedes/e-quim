@@ -1,4 +1,7 @@
-const dbUsers = require('../data/users.json');
+const dbUsers = require('../data/dbUsuarios');
+const db = require('../database/models');
+
+const {validationResult} = require('express-validator');
 const fs = require('fs');
 const path = require('path');
 
@@ -7,30 +10,36 @@ const userController = {
         res.render('registro')
     },
     crear:function(req,res,next){
-        let lastID = 1;
+         /*let lastID = 1;
         dbUsers.forEach(user=>{
             if(user.id > lastID){
                 lastID = user.id
             }
-        })
-        let newUser = {
-            id:lastID + 1,
-            name:req.body.firstName,
-            lastName:req.body.lastName,
-            email:req.body.email,
+        })*/
+        db.Users.create({
+            email:req.body.emaill,
             password:req.body.password,
-            category:req.body.category,
-            telephone: Number(req.body.telephone),
-            address:req.body.address,
-            state:req.body.state,
-            postalCode:Number(req.body.postalCode),
+            nombre:req.body.nombre,
+            apellido:req.body.apellido,
             
-        }
-        dbUsers.push(newUser);
-        
-        fs.writeFileSync(path.join(__dirname,"..","data","users.json"),JSON.stringify(dbUsers),'utf-8')
+            telephone: Number(req.body.telephone),
+            direccion:req.body.direccion,
+            ciudad:req.body.ciudad,
+            provincia:req.body.provincia,
+            
+            
+        })
+        .then(results=>{
+            console.log(results),
+            res.redirect('/')
+        }) 
+        .catch(error=>{
+            res.send(error)
+            return res.redirect('/users/registro')
+           
+        })
 
-        res.redirect('/')
+        
     },
 
 

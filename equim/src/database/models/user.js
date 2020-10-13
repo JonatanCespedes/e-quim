@@ -17,7 +17,7 @@ module.exports = (sequelize, dataTypes) => {
             allowNull:false,
             
         },
-        email:{
+        emaill:{
             type:dataTypes.STRING(45),
             allowNull:false,
             unique:true,
@@ -29,7 +29,7 @@ module.exports = (sequelize, dataTypes) => {
         
         avatar:{
             type:dataTypes.STRING(45),
-            allowNull:false
+            allowNull:true
         },
         direccion:{
             type:dataTypes.STRING(45),
@@ -50,13 +50,8 @@ module.exports = (sequelize, dataTypes) => {
         timestamps: true,
         underscored:true
     }
-    const User = sequelize.define(alias,cols,config);
-    User.associate = function(models){
-        User.hasOne(models.Stores,{
-            as:"tienda",
-            foreignKey:"id_usuario"
-        })
-
-    }
+    
+    const User = sequelize.define(alias,cols,config)
+    
     return User;
 }
