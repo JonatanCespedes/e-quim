@@ -17,7 +17,7 @@ module.exports = (sequelize, dataTypes) => {
             allowNull:false,
             
         },
-        emaill:{
+        email:{
             type:dataTypes.STRING(45),
             allowNull:false,
             unique:true,
@@ -52,6 +52,12 @@ module.exports = (sequelize, dataTypes) => {
     }
     
     const User = sequelize.define(alias,cols,config)
+    User.associate = function (models){
+        User.hasOne(models.Cart,{
+        as:"cart",
+        foreignKey:"id_usuario"
+        })
+    }
     
     return User;
 }

@@ -1,4 +1,4 @@
-module.exports = (sequelize, dataTypes) => {
+ module.exports = (sequelize, dataTypes) => {
     let alias = "Cart";
     let cols = {
         id:{
@@ -8,38 +8,39 @@ module.exports = (sequelize, dataTypes) => {
             primaryKey:true
         },
         id_usuario:{
-            type:dataTypes.INTERGER(11),
+            type:dataTypes.INTEGER(11),
          },
         id_producto:{
-            type:dataTypes.INTERGER(11),
+            type:dataTypes.INTEGER(11),
         },
         cantidad:{
-            type:dataTypes.INTERGER(11),
+            type:dataTypes.INTEGER(11),
         },
         remito:{
-            type:dataTypes.INTERGER(11),
-        }
+            type:dataTypes.INTEGER(11),
+        },
                     
-    },
-}
+    }
+
     let config = {
         tablaName: "cart",
         timestamps:false
     }
     const Cart = sequelize.define(alias,cols,config);
 
-    User.associate = function(models){
-        User.hasOne(models.cart,{
-            as:"cart",
+      Cart.associate = function(models){
+        Cart.belongsTo(models.Users,{
+            as:"users",
             foreignKey:"id_usuario"
         })
-        products.associate = function(models){
-            products.hasOne(models.cart,{
-                as:"cart",
+        
+        Cart.hasMany(models.Products,{
+                as:"products",
                 foreignKey:"id_producto"
             })
     
         }
-    }
+    
 
     return Cart;
+}

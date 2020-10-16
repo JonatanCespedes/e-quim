@@ -8,7 +8,7 @@ const { where } = require('sequelize');
 const productsController = {
     listar: function(req, res) {
         db.products.findAll()
-        .them(productos=>{
+        .then(productos=>{
             res.send(productos)
 
             })
@@ -26,7 +26,7 @@ const productsController = {
     },
     agregar: function (req, res) {
        db.categories.findAll()
-        .them(categorias => {
+        .then(categorias => {
            res.render('productAdd',{
     title:"agregar producto",
     categorias:categorias
@@ -39,7 +39,7 @@ const productsController = {
                id:req.session.user.id
            },
            })
-        }
+        
     .then(users =>{
         db.products.add({   
             nombre:req.body.nombre.trim(),
@@ -49,10 +49,11 @@ const productsController = {
            id_categories:Number(req.body.categories)
         })
     })
-
+    
 .catch(error =>{
     res.send(error)
-}),
+})
+},
 
 show:function(req,res){
     let idProducto = req.params.id;
