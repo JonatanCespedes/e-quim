@@ -47,11 +47,11 @@ module.exports = (sequelize, dataTypes) => {
     }
     let config = {
         tableName: "users",
-        timestamps: true,
+        timestamps: false,
         underscored:true
     }
     
-    const User = sequelize.define(alias,cols,config)
+    const User = sequelize.define(alias,cols,config);
     User.associate = function (models){
         User.hasOne(models.Cart,{
         as:"cart",
