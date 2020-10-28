@@ -2,12 +2,18 @@ var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/userController')
 const carritoController= require('../controllers/carritoControllers')
-/* GET users listing. */
+
+const loginValidator = require('../validations/loginValidator');
+
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
 router.get('/registro', userController.registro )
 router.post('/registro', userController.crear )
+
+router.get('/login', userController.login);
+router.post('/login',loginValidator,userController.processLogin);
+
 router.get('/carrito', carritoController.carrito )
 module.exports = router;

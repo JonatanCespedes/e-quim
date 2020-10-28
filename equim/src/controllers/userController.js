@@ -3,6 +3,7 @@ const dbUsers = require('../data/dbUsuarios');
 const db = require('../database/models');
 
 const {validationResult} = require('express-validator');
+const bcrypt = require('bcrypt');
 const fs = require('fs');
 const path = require('path');
 
@@ -11,23 +12,13 @@ const userController = {
         res.render('registro')
     },
     crear:function(req,res){
-         /*let lastID = 1;
-        dbUsers.forEach(user=>{
-            if(user.id > lastID){
-                lastID = user.id
-            }
-        })*/
         let errors = validationResult(req);
-       
-       if(errors.isEmpty()){
-         
+        if(errors.isEmpty()){
         db.Users.create({
             email:req.body.email.trim(),
-            password:req.body.password.trim(),
+            password:bcrypt.hashSync(req.body.password.trim(),10),
             nombre:req.body.nombre.trim(),
             apellido:req.body.apellido.trim(),
-            
-            telefono: Number(req.body.telefono),
             direccion:req.body.direccion.trim(),
             ciudad:req.body.ciudad.trim(),
             provincia:req.body.provincia.trim(),
@@ -47,7 +38,45 @@ const userController = {
 
     }  
     },
+    login:function(req,res){
+        res.render('registro',{
+            title:"Ingresá a tu cuenta",
+            css: "style.css",
+            usuario:req.session.usuario
+        })
+    },
+    processLogin:function(req,res){
+        let errors = validationResult(req);
+        if(errors.isEmpty()){
+           
+            db.Users.findOne({
+                where:{
+                    email:req.body.email
+                }
+            })
+            .then(user => {
+                req.session.user = {
+                    id: user.id,
+                    nick: user.nombre + " " + user.apellido,
+                    email: user.email,
+                    
+                }
+                if(req.body.recordar){
+                    res.cookie('userEquim',req.session.user,{maxAge:1000*60*2})
+                }
+                res.locals.user = req.session.user;
 
+                return res.redirect('/')
+            })
+        }else{
+            res.render('userLogin',{
+                title:"Ingresá a tu cuenta",
+                css: "index.css",
+                errors:errors.mapped(),
+                old:req.body
+            })
+        }
+    },
 
 
 
