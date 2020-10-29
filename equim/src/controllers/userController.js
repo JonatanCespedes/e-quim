@@ -57,7 +57,7 @@ const userController = {
             .then(user => {
                 req.session.user = {
                     id: user.id,
-                    nick: user.nombre + " " + user.apellido,
+                    nick: user.nombre,
                     email: user.email,
                     
                 }
