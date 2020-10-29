@@ -28,7 +28,7 @@ module.exports = [
     }),
     
 
-    body('password')
+    body('pass')
     .custom((value,{req})=>{
         return db.Users.findOne({
             where:{

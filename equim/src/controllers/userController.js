@@ -69,7 +69,7 @@ const userController = {
                 return res.redirect('/')
             })
         }else{
-            res.render('userLogin',{
+            res.render('registro',{
                 title:"Ingresá a tu cuenta",
                 css: "index.css",
                 errors:errors.mapped(),
