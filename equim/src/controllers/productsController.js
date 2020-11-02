@@ -62,21 +62,19 @@ const productsController = {
 })
 },
 
-show:function(req,res){
+show :function(req,res) {
     let idProducto = req.params.id;
     let resultado = dbproductos.filter(producto=>{
         return producto.id == idProducto
+    
     })
-
     res.render('editarProducto',{
         title: "Ver / Editar Producto",
         producto:resultado[0],
         total:dbproductos.length,
-        
-
-    })
-},
-edit:function(req,res){
+           })
+        },
+edit :function(req,res){
     let idProducto = req.params.id;
 
     dbproductos.forEach(producto => {
@@ -94,7 +92,5 @@ edit:function(req,res){
     res.redirect('/products/show/' + idProducto)
 
 }
-
 }
-
 module.exports = productsController;
