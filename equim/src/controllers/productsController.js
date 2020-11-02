@@ -7,8 +7,8 @@ const { where } = require('sequelize');
 
 const productsController = {
     listar: function(req, res) {
-        db.products.findAll()
-        .then(productos=>{
+        db.Products.findAll()
+        .then(Products=>{
             res.send(productos)
 
             })
@@ -25,51 +25,50 @@ const productsController = {
         }) 
     },
     agregar: function (req, res) {
-       db.categories.findAll()
-        .then(categorias => {
-           res.render('productAdd',{
-    title:"agregar producto",
-    categorias:categorias
-        })
-        })
-},
-    add:function(req,res,next){
-       db.users.findOne({
-           where:{
-               id:req.session.user.id
-           },
-           })
-        
-    .then(users =>{
-        db.products.add({   
-            nombre:req.body.nombre.trim(),
-            precio:Number(req.body.precio),
-            descripcion:req.body.descripcion,
-            imagenes:req.file[0].filename,
-           id_categories:Number(req.body.categories)
-        })
-    })
-    
-.catch(error =>{
-    res.send(error)
-})
-},
+        db.Categories.findAll()
+         .then(categorias => {
+            res.render('productAdd',{
+     title:"agregar producto",
+     categorias:categorias
+         })
+         })
+ },
+     add:function(req,res,next){
+        db.Users.findOne({
+            where:{
+                id:req.session.user.id
+            },
+            })
+         
+     .then(users =>{
+         db.products.add({   
+             nombre:req.body.nombre.trim(),
+             precio:Number(req.body.precio),
+             descripcion:req.body.descripcion,
+             imagenes:req.file[0].filename,
+            id_categories:Number(req.body.categories)
+         })
+     })
+     
+ .catch(error =>{
+     res.send(error)
+ })
+ },
+ 
 
-show:function(req,res){
+show :function(req,res) {
     let idProducto = req.params.id;
     let resultado = dbproductos.filter(producto=>{
         return producto.id == idProducto
+    
     })
-
     res.render('editarProducto',{
         title: "Ver / Editar Producto",
         producto:resultado[0],
         total:dbproductos.length,
-        
-
-    })
-},
-edit:function(req,res){
+           })
+        },
+edit :function(req,res){
     let idProducto = req.params.id;
 
     dbproductos.forEach(producto => {
@@ -87,7 +86,5 @@ edit:function(req,res){
     res.redirect('/products/show/' + idProducto)
 
 }
-
 }
-
 module.exports = productsController;
