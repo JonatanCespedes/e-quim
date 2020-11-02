@@ -1,4 +1,5 @@
 const dbproductos = require('../data/productos.json');
+const dbProducts = require('../data/dbProductos');
 const fs = require('fs');
 const path = require('path');
 
@@ -6,26 +7,32 @@ const db = require("../database/models");
 const { where } = require('sequelize');
 
 const productsController = {
-    listar: function(req, res) {
-        db.products.findAll()
-        .then(productos=>{
-            res.send(productos)
-
-            })
-    },
+    listar: function (req, res) {
+        db.Products.findAll()
+         .then(producto => {
+            res.render('products',{
+     title:"Todos los productos",
+     producto:producto
+         })
+         })
+ },
     productsDetail: function (req, res) {
-        let id = req.params.id;
-        let producto = dbproductos.filter(producto => {
-            return producto.id == id
+        db.Products.findOne({
+            where:{
+                id:req.params.id
+            }
         })
+       
+        .then(producto=>{
         res.render('productDetail', {
             title: "Detalle del Producto",
             id: id,
-            producto: producto[0]
+            producto: producto
         }) 
+        })
     },
     agregar: function (req, res) {
-       db.categories.findAll()
+       db.Categories.findAll()
         .then(categorias => {
            res.render('productAdd',{
     title:"agregar producto",
@@ -40,7 +47,7 @@ const productsController = {
            },
            })
         
-    .then(users =>{
+    .then(producto =>{
         db.products.add({   
             nombre:req.body.nombre.trim(),
             precio:Number(req.body.precio),

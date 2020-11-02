@@ -24,7 +24,7 @@ module.exports = (sequelize, dataTypes) => {
             type:dataTypes.STRING(45),
             allowNull:false
         },
-        id_categorias:{
+        id_categoria:{
             type:dataTypes.INTEGER(11),
             allowNull:false
     },
@@ -32,8 +32,8 @@ module.exports = (sequelize, dataTypes) => {
 
     let config = {
         tableName  : "products",
-        timestamps: true,
-        underscored: true
+        timestamps: false,
+       
     }
     const Product = sequelize.define(alias,cols,config)
 
@@ -43,11 +43,11 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey:"id_categoria",
         
         })
-        Product.belongsTo(models.Cart,{
+       /* Product.belongsTo(models.Cart,{
             as:"cart",
             foreignKey:"id_cart",
 
-    })
+    })*/
 
     }
     return Product;

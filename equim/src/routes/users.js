@@ -14,6 +14,7 @@ router.post('/registro', userController.crear )
 
 router.get('/login', userController.login);
 router.post('/login',loginValidator,userController.processLogin);
+router.get('/logout', userController.logout);
 
 router.get('/carrito', carritoController.carrito )
 module.exports = router;

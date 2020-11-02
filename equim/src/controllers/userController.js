@@ -78,9 +78,14 @@ const userController = {
         }
     },
 
+    logout:function(req,res){
+        req.session.destroy();
+        if(req.cookies.userMercadoLiebre){
+            res.cookie('userMercadoLiebre','',{maxAge:-1})
+        }
+        return res.redirect('/')
 
-
-
+    },
 
 
 

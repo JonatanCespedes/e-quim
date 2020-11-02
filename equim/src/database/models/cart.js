@@ -28,7 +28,7 @@
     }
     const Cart = sequelize.define(alias,cols,config);
 
-      Cart.associate = function(models){
+     /* Cart.associate = function(models){
         Cart.belongsTo(models.Users,{
             as:"users",
             foreignKey:"id_usuario"
@@ -39,7 +39,7 @@
                 foreignKey:"id_producto"
             })
     
-        }
+        }*/
     
 
     return Cart;

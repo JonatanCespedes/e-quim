@@ -43,34 +43,21 @@
           </a>
         </div>
         <!--icono usuario-->
-        <div class="col-1 btn-group">
-          <a href="/users/registro">
-            <i 
-              class="fa fa-user btn-default dropdown-toggle"
-              data-toggle="dropdown"
-              style="color: #00afef;"
-              aria-hidden="true">
-              <%= (locals.user)?locals.user.nick:"Invitado" %> <span class="caret"></span>
+        <div class="col-1 ">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user" style="color: #00afef;">
+              <%= (locals.user)?locals.user.nick:"Invitado" %>
             </i>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Acción #1</a></li>
-              <li><a href="#">Acción #2</a></li>
-              <li><a href="#">Acción #3</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Acción #4</a></li>
-            </ul>
-          
-            
-          
           </a>
-
- 
-          
-
-
-
-
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/users/registro">Registro</a>
+            <a class="dropdown-item" href="/users/registro">Iniciar sesion</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="users/logout">Cerrar sesion</a>
+          </div>
         </div>
+  
        
 
       </div>
