@@ -77,11 +77,49 @@ const userController = {
             })
         }
     },
-
+    profile:function(req,res){
+        
+        if(req.session.user){
+            db.Users.findByPk(req.session.user.id)
+            .then(user => {
+                console.log(user)
+                res.render('userProfile', {
+                    title: "Perfil de usuario",
+                    css:"profile.css",
+                    usuario:user,
+                })
+            })
+        }else{
+            res.redirect('/')
+        }
+    },
+    updateProfile: function(req,res){
+        db.Users.update(
+            {
+                email:req.body.email.trim(),
+                nombre:req.body.nombre.trim(),
+                apellido:req.body.apellido.trim(),
+                direccion:req.body.direccion.trim(),
+                ciudad:req.body.ciudad.trim(),
+                provincia:req.body.provincia.trim(), 
+            },
+            {
+                where:{
+                    id:req.params.id
+                }
+            }
+        )
+        .then(result => {
+             res.redirect('/users/profile')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
     logout:function(req,res){
         req.session.destroy();
-        if(req.cookies.userMercadoLiebre){
-            res.cookie('userMercadoLiebre','',{maxAge:-1})
+        if(req.cookies.userEquim){
+            res.cookie('userEquim','',{maxAge:-1})
         }
         return res.redirect('/')
 
