@@ -1,4 +1,5 @@
 const dbproductos = require('../data/productos.json');
+const dbProducts = require('../data/dbProductos');
 const fs = require('fs');
 const path = require('path');
 
@@ -6,55 +7,59 @@ const db = require("../database/models");
 const { where } = require('sequelize');
 
 const productsController = {
-    listar: function(req, res) {
+    listar: function (req, res) {
         db.Products.findAll()
-        .then(Products=>{
-            res.send(productos)
-
-            })
-    },
+         .then(productos => {
+            res.render('products',{
+     title:"Todos los productos",
+     productos:productos
+         })
+         })
+ },
     productsDetail: function (req, res) {
-        let id = req.params.id;
-        let producto = dbproductos.filter(producto => {
-            return producto.id == id
+        db.Products.findOne({
+            where:{
+                id:req.params.id
+            }
         })
-        res.render('productDetail', {
-            title: "Detalle del Producto",
-            id: id,
-            producto: producto[0]
-        }) 
+       
+        .then(producto=>{
+            res.render('productDetail', {
+                title: "Detalle del Producto",
+                id:req.params.id,
+                producto: producto
+            }) 
+        })
     },
     agregar: function (req, res) {
-        db.Categories.findAll()
-         .then(categorias => {
-            res.render('productAdd',{
-     title:"agregar producto",
-     categorias:categorias
-         })
-         })
- },
-     add:function(req,res,next){
-        db.Users.findOne({
-            where:{
-                id:req.session.user.id
-            },
+       db.Categories.findAll()
+        .then(categorias => {
+           res.render('productAdd',{
+                title:"agregar producto",
+                categorias:categorias
+           })
+        })
+},
+    add:function(req,res){
+  
+      db.Products.create({   
+            nombre:req.body.name.trim(),
+            precio:Number(req.body.price),
+            descripcion:req.body.description,
+            imagen:req.file[0].filename,
+           id_categories:Number(req.body.category)
+        })
+     .then(producto=>{
+            res.render('productDetail', {
+                title: "Detalle del Producto",
+                id:req.params.id,
+                producto: producto
+            }) 
             })
-         
-     .then(users =>{
-         db.products.add({   
-             nombre:req.body.nombre.trim(),
-             precio:Number(req.body.precio),
-             descripcion:req.body.descripcion,
-             imagenes:req.file[0].filename,
-            id_categories:Number(req.body.categories)
-         })
-     })
-     
- .catch(error =>{
-     res.send(error)
- })
- },
- 
+        .catch(error =>{
+        res.send(error)
+    })
+    },
 
 show :function(req,res) {
     let idProducto = req.params.id;
@@ -78,13 +83,13 @@ edit :function(req,res){
             producto.price = Number(req.body.price);
             producto.category = req.body.category.trim();
             producto.description = req.body.description.trim();
-            //producto.image = (req.files[0]) ? req.files[0].filename : producto.image
+            producto.imagen = (req.files[0]) ? req.files[0].filename : producto.image
         }
     })
 
     fs.writeFileSync(path.join(__dirname, '../data/productos.json'), JSON.stringify(dbproductos))
     res.redirect('/products/show/' + idProducto)
+}
+}
 
-}
-}
 module.exports = productsController;

@@ -1,4 +1,4 @@
-[{"id":1,"name":"Alcohol 4lts","description":"adipiscing elit proin risus praesent lectus vestibulum quam sapien varius ut blandit non interdum in ante vestibulum ante","imagen":"alcohol-4lts.jpg","category":"Productos Varios","price":"$250.00"},
+[{"id":1,"name":"Alcohol 4lts","description":"alcohol al 70%","imagen":"alcohol-4lts.jpg","category":"Productos Varios","price":"$250.00"},
 {"id":2,"name":"Alcohol 1lt","description":"nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at","imagen":"alcohol-un-litro.jpg","category":"Prpductos Varios","price":"$80.00"},
 {"id":3,"name":"Lavandina 4lts","description":"libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla","imagen":"lavandina-cuatro-litros.jpg","category":"Productos Varios","price":"$300.00"},
 {"id":4,"name":"Lavandina doble 1lt","description":"gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo","imagen":"lavandina-doble-1lt.jpg","category":"ProductosVarios","price":"$90.00"},
