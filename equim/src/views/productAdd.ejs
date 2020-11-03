@@ -18,27 +18,29 @@
           <form class="col-12 col-md-12" action="/products/agregarProducto" method="post">
             <div class= "form-group">
               <label for="name">Nombre:</label>
-              <input type="text" name="name">
+              <input type="text" name="nombre">
             </div>
             <div class= "form-group">
               <label for="category">Categoria:</label>
-              <input type="text" name="category">
+              <input type="text" name="categoria">
             </div>
             <div class= "form-group">
               <label for="price">Precio:</label>
-              <input type="text" name="price">
+              <input type="text" name="precio">
             </div>
             <div class= "form-group">
-              <label for="decription">Descripción del Producto:</label>
+              <label for="decription">Descripcion:</label>
+              
             </div>
             <textarea cols="" rows=""></textarea>
             <div class="form-row">
               <div class="form-group col-12 col-xl-6">
-                  <div class="custom-file">
+              </div> 
+                <div class="custom-file">
                     <input type="file" class="custom-file-input " id="imagen" lang="en" name="imagen">
-                    <label class="custom-file-label" for="customFileLang">Imagenes</label>
+                    <label class="custom-file-label" for="customFileLang">Seleccione Imagenes</label>
                     <small id="errorImagen" class="text-danger"><%= (typeof errors != 'undefined' && errors.imagen)?errors.imagen.msg: "" %> </small>
-                  </div>
+                  
                 </div>
             <div class= "form-group">
               <button type="submit">AGREGAR NUEVO PRODUCTO</button>

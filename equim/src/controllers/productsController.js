@@ -40,14 +40,14 @@ const productsController = {
            })
         })
 },
-    add:function(req,res){
+    add: function(req,res){
   
       db.Products.create({   
-            nombre:req.body.name.trim(),
-            precio:Number(req.body.price),
-            descripcion:req.body.description,
-            imagen:req.file[0].filename,
-           id_categories:Number(req.body.category)
+            nombre:req.body.nombre.trim(),
+            precio:Number(req.body.precio),
+            descripcion:req.body.descripcion,
+           /* imagen = (req.files[0]) ? req.files[0].filename:req.producto.imagen,*/
+            id_categories:Number(req.body.id_category)
         })
      .then(producto=>{
             res.render('productDetail', {
