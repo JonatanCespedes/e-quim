@@ -46,20 +46,26 @@ const productsController = {
             nombre:req.body.nombre.trim(),
             precio:Number(req.body.precio),
             descripcion:req.body.descripcion,
-           /* imagen = (req.files[0]) ? req.files[0].filename:req.producto.imagen,*/
-            id_categories:Number(req.body.id_category)
+            imagen : req.files[0].filename,
+            id_categoria:Number(req.body.category)
         })
      .then(producto=>{
-            res.render('productDetail', {
-                title: "Detalle del Producto",
-                id:req.params.id,
-                producto: producto
-            }) 
-            })
+        db.Categories.findAll()
+       
+        .then(categorias => {
+           res.render('productAdd',{
+                title:"agregar producto",
+                categorias:categorias
+           })
+        })
         .catch(error =>{
         res.send(error)
+        })
     })
-    },
+    .catch(error =>{
+        res.send(error)
+        })   
+},
 
 show :function(req,res) {
     let idProducto = req.params.id;

@@ -15,14 +15,21 @@
       </div>
       <div class="col-12">
         <article>
-          <form class="col-12 col-md-12" action="/products/agregarProducto" method="post">
+          <form class="col-12 col-md-12" action="/products/agregarProducto" method="POST" enctype="multipart/form-data">
             <div class= "form-group">
               <label for="name">Nombre:</label>
               <input type="text" name="nombre">
             </div>
             <div class= "form-group">
               <label for="category">Categoria:</label>
-              <input type="text" name="categoria">
+              <select name="category" id="categorySelect">
+                <option hidden selected value="0" >Elija una Categoria</option>
+               <% categorias.forEach(categoria => { %>
+                <option value="<%= categoria.id %>"<% if(typeof oldAdd != 'undefined' && oldAdd.categoria){%> selected <% } %>><%= categoria.nombre %> </option>
+               <% }) %>
+            </select>
+
+
             </div>
             <div class= "form-group">
               <label for="price">Precio:</label>
@@ -30,9 +37,8 @@
             </div>
             <div class= "form-group">
               <label for="decription">Descripcion:</label>
-              
+              <textarea cols="" rows="" name="descripcion"></textarea>
             </div>
-            <textarea cols="" rows=""></textarea>
             <div class="form-row">
               <div class="form-group col-12 col-xl-6">
               </div> 
