@@ -27,7 +27,7 @@ module.exports = (sequelize, dataTypes) => {
             allowNull:false
         },
         
-        avatar:{
+        rol:{
             type:dataTypes.STRING(45),
             allowNull:true
         },
