@@ -3,6 +3,8 @@ const dbProducts = require('../data/dbProductos');
 const fs = require('fs');
 const path = require('path');
 
+
+
 const db = require("../database/models");
 const { where } = require('sequelize');
 
@@ -40,34 +42,34 @@ const productsController = {
            })
         })
 },
-    add: function(req,res){
+add: function(req,res){
   
-      db.Products.create({   
-            nombre:req.body.nombre.trim(),
-            precio:Number(req.body.precio),
-            descripcion:req.body.descripcion,
-            imagen : req.files[0].filename,
-            id_categoria:Number(req.body.category)
-        })
-     .then(producto=>{
-        db.Categories.findAll()
-       
-        .then(categorias => {
-           res.render('productAdd',{
-                title:"agregar producto",
-                categorias:categorias
-           })
-        })
-        .catch(error =>{
-        res.send(error)
-        })
-    })
-    .catch(error =>{
-        res.send(error)
-        })   
+    db.Products.create({   
+          nombre:req.body.nombre.trim(),
+          precio:Number(req.body.precio),
+          descripcion:req.body.descripcion,
+          imagen : req.files[0].filename,
+          id_categoria:Number(req.body.category)
+      })
+   .then(producto=>{
+      db.Categories.findAll()
+     
+      .then(categorias => {
+         res.render('productAdd',{
+              title:"agregar producto",
+              categorias:categorias
+         })
+      })
+      .catch(error =>{
+      res.send(error)
+      })
+  })
+  .catch(error =>{
+      res.send(error)
+      })   
 },
 
-show :function(req,res) {
+show :function (req,res) {
     let idProducto = req.params.id;
     let resultado = dbproductos.filter(producto=>{
         return producto.id == idProducto
@@ -96,6 +98,6 @@ edit :function(req,res){
     fs.writeFileSync(path.join(__dirname, '../data/productos.json'), JSON.stringify(dbproductos))
     res.redirect('/products/show/' + idProducto)
 }
-}
-
+        }
+    
 module.exports = productsController;

@@ -94,12 +94,9 @@ const userController = {
         }
     },
     updateProfile: function(req,res){
-        db.Users.update(
+       db.Users.update(
             {
-                email:req.body.email.trim(),
-                nombre:req.body.nombre.trim(),
-                apellido:req.body.apellido.trim(),
-                direccion:req.body.direccion.trim(),
+              direccion:req.body.direccion.trim(),
                 ciudad:req.body.ciudad.trim(),
                 provincia:req.body.provincia.trim(), 
             },
