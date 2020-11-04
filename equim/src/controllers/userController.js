@@ -94,7 +94,9 @@ const userController = {
         }
     },
     updateProfile: function(req,res){
+        
         db.Users.update(
+            
             {
                 email:req.body.email.trim(),
                 nombre:req.body.nombre.trim(),
@@ -110,7 +112,7 @@ const userController = {
             }
         )
         .then(result => {
-             res.redirect('/users/profile')
+             res.redirect('/users/userProfile')
         })
         .catch(err => {
             console.log(err)
