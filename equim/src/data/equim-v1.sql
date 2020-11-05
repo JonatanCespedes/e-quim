@@ -1,0 +1,1 @@
+SELECT * FROM `equim-v`.products;
