@@ -69,34 +69,40 @@ add: function(req,res){
       })   
 },
 
-show :function (req,res) {
-    let idProducto = req.params.id;
-    let resultado = dbproductos.filter(producto=>{
-        return producto.id == idProducto
+show :function (req,res) {      //pasar a sequelize 3
     
-    })
-    res.render('editarProducto',{
-        title: "Ver / Editar Producto",
-        producto:resultado[0],
-        total:dbproductos.length,
-           })
-        },
+        let producto= db.Products.findByPk(req.params.id,{include:{association:"categoria"}})
+        let categorias = db.Categories.findAll()
+
+    
+        Promise.all([producto,categorias])
+        .then(([producto,categorias])=> {
+           res.render('editarProducto',{
+                title:"ver / Editar producto",
+                categorias:categorias,
+                producto:producto
+            })
+        })
+ },
 edit :function(req,res){
-    let idProducto = req.params.id;
-
-    dbproductos.forEach(producto => {
-        if (producto.id == idProducto) {
-            producto.id = Number(req.body.id);
-            producto.name = req.body.name.trim();
-            producto.price = Number(req.body.price);
-            producto.category = req.body.category.trim();
-            producto.description = req.body.description.trim();
-            producto.imagen = (req.files[0]) ? req.files[0].filename : producto.image
-        }
-    })
-
-    fs.writeFileSync(path.join(__dirname, '../data/productos.json'), JSON.stringify(dbproductos))
-    res.redirect('/products/show/' + idProducto)
+   console.log(req.body.precio)
+    db.Products.update({ 
+        nombre:req.body.nombre.trim(),
+        precio:Number(req.body.precio),
+        descripcion:req.body.descripcion,
+        imagen : req.files[0].filename,
+        id_categoria:Number(req.body.category),
+    },
+         { where:{
+                   id:req.params.id
+    }})
+ 
+    .then(producto=>{
+        res.redirect('/products/show/' + producto.id)
+})
+.catch(error =>{
+    res.send(error)
+    })  
 }
         }
     

@@ -12,6 +12,6 @@ router.post('/agregarProducto',upImagesProducts.any(),productsController.add);
 //router.post('/add', upImagesProducts.any(), productsController.add)
 
 router.get('/show/:id',productsController.show);
-router.put('/edit/:id',productsController.edit);
+router.post('/edit/:id',productsController.edit);
 
 module.exports = router;
