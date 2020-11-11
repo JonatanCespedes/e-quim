@@ -85,7 +85,7 @@ show :function (req,res) {      //pasar a sequelize 3
         })
  },
 edit :function(req,res){
-   console.log(req.body.precio)
+   console.log(req.body)
     db.Products.update({ 
         nombre:req.body.nombre.trim(),
         precio:Number(req.body.precio),
@@ -97,8 +97,8 @@ edit :function(req,res){
                    id:req.params.id
     }})
  
-    .then(producto=>{
-        res.redirect('/products/show/' + producto.id)
+    .then( () => {
+        res.redirect('/products/show/' + req.params.id)
 })
 .catch(error =>{
     res.send(error)
