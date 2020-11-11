@@ -1,116 +1,123 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<header class="container-fluid">
-    <div class="container">
-      <div class="row">
-         <!--logo-->
-        <div class="col-4">
-          <a href="/"
-            ><img
-              src="/images/logo-equim.svg"
-              alt=""
-              width= "100%"
-              height= "100%"
-          /></a>
-        </div>
-         <!--buscador-->
-       <div class="col-6">
-          <div class="input-group">
-            <input
-              class="form-control my-0 py-1 grey-border"
-              type="text"
-              placeholder="Buscar"
-              aria-label="Search"
-            />
-            <div class="input-group-append">
-              <span class="input-group-text red lighten-3" id="basic-text1"
-                ><i class="fas fa-search text-grey" aria-hidden="true"></i
-              ></span>
-            </div>
-          </div>
-        </div>
-        
+  <header class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <!--logo-->
+                <div class="col-4">
+                  <a href="/"
+                    ><img
+                      src="/images/logo-equim.svg"
+                      alt=""
+                      width= "100%"
+                      height= "100%"
+                  /></a>
+                </div>
+                <!--buscador-->
+              <div class="col-6">
+                  <div class="input-group">
+                    <input
+                      class="form-control my-0 py-1 grey-border"
+                      type="text"
+                      placeholder="Buscar"
+                      aria-label="Search"
+                    />
+                    <div class="input-group-append">
+                      <span class="input-group-text red lighten-3" id="basic-text1"
+                        ><i class="fas fa-search text-grey" aria-hidden="true"></i
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+              
 
-         <!--icono carrito de compras-->
-        <div class="col-1">
-          <a href="/users/carrito">
-            <i
-              class="fa fa-shopping-cart"
-              style="color: #00afef;"
-              aria-hidden="true"
-          ></i>
-          </a>
-        </div>
-        <!--icono usuario-->
-        
-        <div class="col-1 ">
-          
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            
-            <i class="fa fa-user" style="color: #00afef;">
-              <%= (locals.user)?locals.user.nick:"Invitado" %>
-            </i>
-          </a>
-         
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% if ( typeof locals.user == "undefined") { %>
-            <a class="dropdown-item" href="/users/registro">Registro</a>
-            <a class="dropdown-item" href="/users/registro">Iniciar sesion</a>
-          
-          <% } else if (  locals.user.rol == "admin") { %>
-            <a class="dropdown-item" href="/users/profile">Mis datos</a>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Administar sitio
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/products/agregarProducto">Agregar producto</a>
-                <a class="dropdown-item" href="/products/">Editar/Eliminar productos</a>
-                
+              <!--icono carrito de compras-->
+              <div class="col-1">
+                <a href="/users/carrito">
+                  <i
+                    class="fa fa-shopping-cart"
+                    style="color: #00afef;"
+                    aria-hidden="true"
+                ></i>
+                </a>
               </div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/users/logout">Cerrar sesion</a> 
-          <% } else{ %>
-              <a class="dropdown-item" href="/users/profile">Mis datos</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/users/logout">Cerrar sesion</a> 
-            <% } %>
-          
-        
-      </div>
-        </div>
-      
-       
+              <!--icono usuario-->
+              
+              <div class="col-1 ">
+                
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    
+                    <i class="fa fa-user" style="color: #00afef;">
+                      <%= (locals.user)?locals.user.nick:"Invitado" %>
+                    </i>
+                  </a>
+                
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <% if ( typeof locals.user == "undefined") { %>
+                        
+                        <a class="dropdown-item" href="/users/registro">Registro</a>
+                        <a class="dropdown-item" href="/users/registro">Iniciar sesion</a>
+                    
+                      <% } else if (  locals.user.rol == "admin") { %>
 
+                        <a class="dropdown-item" href="/users/profile">Mis datos</a>
+                        <select class="dropdown-item" name="" id="">
+                          <option value="">Administrar sitio</option>
+                          <a href="/products/agregarProducto">
+                            <option value="">Agregar producto</option>
+                          </a>
+                          <a href="/products">
+                            <option value="">Editar/Eliminar productos</option>
+                          </a>
+                          
+                        </select>
+                        <!-- <div class="dropdown">
+                            <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Administar sitio
+                            </button>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/products/agregarProducto">Agregar producto</a>
+                                <a class="dropdown-item" href="/products/">Editar/Eliminar productos</a>
+                                
+                              </div>
+                        </div> -->
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/users/logout">Cerrar sesion</a> 
+
+                      <% } else{ %>
+
+                        <a class="dropdown-item" href="/users/profile">Mis datos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/users/logout">Cerrar sesion</a> 
+
+                      <% } %>              
+                </div>
+            </div>
+              <!--hamburgesa-->
+            <nav class="navbar-expand-md">
+                <button
+                  class="navbar-toggler burger"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <i class="fas fa-bars"></i>
+                </button>
+                <!--menu-->
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="menu navbar-nav mr-auto">
+                      <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA BAÑO</a></li>
+                      <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA COCINA</a></li>
+                      <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA PISO</a></li>
+                      <li class="col-12 col-md-3"><a href="/products">PRODUCTOS VARIOS</a></li>
+                    </ul>
+                  </div>
+              </nav>
+          
       </div>
-        <!--hamburgesa-->
-     <nav class="navbar-expand-md">
-        <button
-          class="navbar-toggler burger"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-        <!--menu-->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="menu navbar-nav mr-auto">
-              <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA BAÑO</a></li>
-              <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA COCINA</a></li>
-              <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA PISO</a></li>
-              <li class="col-12 col-md-3"><a href="/products">PRODUCTOS VARIOS</a></li>
-            </ul>
-          </div>
-      </nav>
-    </div>
-    
-  </header>
+    </header>
   </html>

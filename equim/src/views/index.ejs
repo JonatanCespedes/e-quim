@@ -33,7 +33,7 @@
             <article>
               <h3> <%= producto.price %> </h3>
               <p> <%= producto.name %> </p>
-              
+              <% if ( typeof locals.user == "undefined" || locals.user.rol == "user") { %>
               <a href=""
                 ><i
                   class="fa fa-shopping-cart"
@@ -41,6 +41,11 @@
                   aria-hidden="true"
                 ></i>
               </a>
+              <% } else  { %>
+                <form action="/products/delete/<%= producto.id %>?_method=DELETE" method="POST">
+                <button type="button" class="btn btn-danger">Eliminar</button> </form>
+                <button type="button" class="btn btn-warning">Editar</button>
+                <% } %>  
             </article>
           </div>
         </div>

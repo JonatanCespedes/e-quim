@@ -103,7 +103,20 @@ edit :function(req,res){
 .catch(error =>{
     res.send(error)
     })  
-}
+},
+delete :function(req,res){
+    
+     db.Products.delete(
+    { where:{
+     id:req.params.id
+     }})
+.then( () => {
+         res.redirect('/products')
+ })
+ .catch(error =>{
+     res.send(error)
+     })  
+},
         }
     
 module.exports = productsController;
