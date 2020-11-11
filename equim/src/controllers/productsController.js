@@ -98,7 +98,7 @@ edit :function(req,res){
     }})
  
     .then(producto=>{
-        res.redirect('/products/show/' + producto.id)
+        res.redirect('/products/show/'+ producto.id)
 })
 .catch(error =>{
     res.send(error)
