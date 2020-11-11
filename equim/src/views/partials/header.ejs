@@ -43,29 +43,48 @@
           </a>
         </div>
         <!--icono usuario-->
+        
         <div class="col-1 ">
+          
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
+            
             <i class="fa fa-user" style="color: #00afef;">
               <%= (locals.user)?locals.user.nick:"Invitado" %>
             </i>
           </a>
+         
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if ( typeof locals.user == "undefined") { %>
             <a class="dropdown-item" href="/users/registro">Registro</a>
             <a class="dropdown-item" href="/users/registro">Iniciar sesion</a>
-            <a class="dropdown-item" href="/users/profile">Mis datos</a>
-            
-            <a class="dropdown-item" href="/users/registro">admiministrar sitio</a>
-            
           
+          <% } else if (  locals.user.rol == "admin") { %>
+            <a class="dropdown-item" href="/users/profile">Mis datos</a>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Administar sitio
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/products/agregarProducto">Agregar producto</a>
+                <a class="dropdown-item" href="/products/">Editar/Eliminar productos</a>
+                
+              </div>
+            </div>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/users/logout">Cerrar sesion</a>
-          </div>
-       
+            <a class="dropdown-item" href="/users/logout">Cerrar sesion</a> 
+          <% } else{ %>
+              <a class="dropdown-item" href="/users/profile">Mis datos</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/users/logout">Cerrar sesion</a> 
+            <% } %>
+          
+        
+      </div>
         </div>
-
-        </div>
-  
+      
        
 
       </div>

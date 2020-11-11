@@ -24,7 +24,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(methodOverride('_method'));
 
-app.use(session({secret:"equim"}));
+app.use(session({secret:"equim",
+resave: true,
+saveUninitialized: true
+}));
 app.use(localCheckUser);
 
 app.use('/', indexRouter);

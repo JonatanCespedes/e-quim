@@ -4,6 +4,7 @@ var router = express.Router();
 const productsController = require('../controllers/productsController')
 const upImagesProducts = require('../middlewares/upImagesProducts');
 const adminUsserCheck = require ('../middlewares/adminUsserCheck')
+
 router.get('/',productsController.listar);
 router.get('/productDetail/:id',productsController.productsDetail);
 
