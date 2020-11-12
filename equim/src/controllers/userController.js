@@ -59,7 +59,7 @@ const userController = {
                     id: user.id,
                     nick: user.nombre,
                     email: user.email,
-                    
+                    rol:user.rol,
                 }
                 if(req.body.recordar){
                     res.cookie('userEquim',req.session.user,{maxAge:1000*60*2})

@@ -5,7 +5,7 @@ const carritoController= require('../controllers/carritoControllers')
 
 const loginValidator = require('../validations/loginValidator');
 const sessionUserCheck = require('../middlewares/sessionUserCheck')
-
+const adminUserCheck = require('../middlewares/adminUsserCheck')
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
 router.get('/registro', userController.registro )
 router.post('/registro', userController.crear )
 
-router.get('/login', sessionUserCheck,userController.login);
-router.post('/login',loginValidator,userController.processLogin);
+router.get('/login', sessionUserCheck, adminUserCheck , userController.login);
+router.post('/login',loginValidator, userController.processLogin);
 router.get('/logout', userController.logout);
 
 router.get('/profile', userController.profile);

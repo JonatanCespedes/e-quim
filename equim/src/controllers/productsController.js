@@ -84,26 +84,27 @@ show :function (req,res) {      //pasar a sequelize 3
             })
         })
  },
-edit :function(req,res){
-   console.log(req.body.precio)
-    db.Products.update({ 
-        nombre:req.body.nombre.trim(),
-        precio:Number(req.body.precio),
-        descripcion:req.body.descripcion,
-        imagen : req.files[0].filename,
-        id_categoria:Number(req.body.category),
-    },
-         { where:{
-                   id:req.params.id
-    }})
- 
-    .then(producto=>{
-        res.redirect('/products/show/'+ producto.id)
-})
-.catch(error =>{
-    res.send(error)
-    })  
+    edit :function(req,res){
+    console.log(req.body)
+        db.Products.update({ 
+            nombre:req.body.nombre.trim(),
+            precio:Number(req.body.precio),
+            descripcion:req.body.descripcion,
+            imagen : req.files[0].filename,
+            id_categoria:Number(req.body.category),
+        },
+        { 
+            where:{
+                    id:req.params.id
+                }
+        })
+        .then( () => {
+            res.redirect('/products/show/' + req.params.id)
+        })
+        .catch(error =>{
+            res.send(error)
+        })  
+    }
 }
-        }
     
 module.exports = productsController;
