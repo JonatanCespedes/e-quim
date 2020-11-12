@@ -14,5 +14,5 @@ router.post('/agregarProducto',upImagesProducts.any(),productsController.add);
 
 router.get('/show/:id',adminUsserCheck,productsController.show);
 router.put('/edit/:id',adminUsserCheck,upImagesProducts.any(),productsController.edit);
-
+router.delete('/delete/:id',adminUsserCheck,productsController.delete)
 module.exports = router;
