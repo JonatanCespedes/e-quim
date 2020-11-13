@@ -26,7 +26,6 @@ module.exports = (sequelize, dataTypes) => {
             type:dataTypes.STRING(100),
             allowNull:false
         },
-        
         rol:{
             type:dataTypes.STRING(45),
             allowNull:true

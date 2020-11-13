@@ -1,6 +1,6 @@
 const {check,validatorResult,body} = require('express-validator');
 const bcrypt = require('bcrypt');
-const dbUsuarios = require('../data/dbUsuarios');
+
 
 const db = require('../database/models');
 
@@ -32,11 +32,13 @@ module.exports = [
     .custom((value,{req})=>{
         return db.Users.findOne({
             where:{
-                email:req.body.email
+                email:req.body.emailLogin
             }
         })
         .then(user => {
+            
             if(!bcrypt.compareSync(value,user.dataValues.password)){
+               
                 return Promise.reject()
             }
         })

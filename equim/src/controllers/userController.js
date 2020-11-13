@@ -10,7 +10,7 @@ const path = require('path');
 const userController = {
     registro: function (req,res){
         res.render('registro',{
-            title: 'e-Quim - Registro'
+            title: 'e-Quim - Registro'  
         })
     },
     crear:function(req,res){
@@ -59,7 +59,7 @@ const userController = {
            
             db.Users.findOne({
                 where:{
-                    email:req.body.email
+                    email:req.body.emailLogin
                 }
             })
             .then(user => {
