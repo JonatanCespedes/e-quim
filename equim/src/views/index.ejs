@@ -24,15 +24,17 @@
         <% productos.forEach(producto =>{ %> 
         <div class="col-12 col-md-6 col-lg-3">
           <div class="contenido">
-            <img
-              src="images/<%= producto.imagen %>  "
-              width="80%"
-              height="80%"
-              alt=""
-            />
+            <a href="/products/productDetail/<%- producto.id %> ">
+              <img
+                src="images/<%= producto.imagen %>  "
+                width="80%"
+                height="80%"
+                alt=""
+              />
+            </a>
             <article>
-              <h3> <%= producto.price %> </h3>
-              <p> <%= producto.name %> </p>
+              <h3>$ <%= producto.precio %> </h3>
+              <p> <%= producto.nombre %> </p>
               <% if ( typeof locals.user == "undefined" || locals.user.rol == "user") { %>
               <a href=""
                 ><i
@@ -43,8 +45,9 @@
               </a>
               <% } else  { %>
                 <form action="/products/delete/<%= producto.id %>?_method=DELETE" method="POST">
-                <button type="button" class="btn btn-danger">Eliminar</button> </form>
-                <button type="button" class="btn btn-warning">Editar</button>
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+               </form>
+                <a href="/products/show/<%- producto.id %> ">Editar</a>
                 <% } %>  
             </article>
           </div>
@@ -72,9 +75,9 @@
                 alt=""
               />
               <article>
-                <h3> <%= producto.price %> </h3>
-                <p> <%= producto.name %> </p>
-                <a href=""
+                <h3> <%= producto.precio %> </h3>
+                <p> <%= producto.nombre %> </p>
+                <a href="/"
                   ><i
                     class="fa fa-shopping-cart"
                     style="color: #00afef;"

@@ -22,6 +22,7 @@ body {
 header {
   background-color:var(--color-turquesaClaro);
     padding: 20px 0px;
+    position: relative;
 }
 header a:hover{
   text-decoration: none;
@@ -58,11 +59,11 @@ header .col-1 {
 header a{
   color: black;
 }
+
 header .container-fluid .row .col-4 {
   padding-left: 5%;
   padding-bottom: 1%;
 }
-
 
 header ul {
   color: blue;
@@ -71,7 +72,6 @@ header ul {
   padding: 0% 15% 0% 15%;
   margin-top: 1%;
 }
-
 
 section .contenido {
   margin-bottom: 30px;
@@ -102,4 +102,29 @@ footer li{
 footer a{
   text-transform: capitalize;
   color: black;
+}
+
+@media(max-width: 576px){
+  header .usuario{
+    position: absolute;
+    right: 100px;
+    bottom: 5px
+  }
+  header .desplegableBurguer{
+    margin-bottom:30px;
+  }
+}
+
+/* DETALLE DE PRODUCTO */
+
+
+.productDetail .imgContainer{
+    width: 75%;
+    margin: 0 auto;
+}
+.productDetail .detalles{
+  padding-top: 50px;
+}
+.productDetail .detalles .btn{
+  text-align: center;
 }

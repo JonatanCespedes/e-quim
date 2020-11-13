@@ -5,7 +5,7 @@ const dbUsuarios = require('../data/dbUsuarios');
 const db = require('../database/models');
 
 module.exports = [
-    check('email')
+    check('emailLogin')
     .isEmail()
     .withMessage('Debes ingresar un email válido'),
 
@@ -13,7 +13,7 @@ module.exports = [
     .isLength(1)
     .withMessage('Debes ingresar una contraseña'),
 
-    body('email')
+    body('emailLogin')
     .custom(function(value){
        return db.Users.findOne({
            where: {

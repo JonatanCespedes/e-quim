@@ -9,10 +9,13 @@ const path = require('path');
 
 const userController = {
     registro: function (req,res){
-        res.render('registro')
+        res.render('registro',{
+            title: 'e-Quim - Registro'
+        })
     },
     crear:function(req,res){
         let errors = validationResult(req);
+
         if(errors.isEmpty()){
         db.Users.create({
             email:req.body.email.trim(),
@@ -27,16 +30,20 @@ const userController = {
         })
         .then(results=>{
             console.log(results),
-            res.redirect('/')
+            res.redirect('/users/registro')
         }) 
         .catch(error=>{
-            console.log(error)
-            res.send(error)
-            return res.redirect('/users/registro')
-           
-        })
-
-    }  
+            console.log(error);
+            res.redirect('/users/registro')
+           })
+        }else{
+            console.log(errors.mapped())
+            res.render('registro', {
+                title: 'Error',
+                errors : errors.mapped(),
+                oldRegister: req.body
+            })
+        }  
     },
     login:function(req,res){
         res.render('registro',{
@@ -47,6 +54,7 @@ const userController = {
     },
     processLogin:function(req,res){
         let errors = validationResult(req);
+        
         if(errors.isEmpty()){
            
             db.Users.findOne({

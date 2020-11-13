@@ -14,8 +14,8 @@
       <div class="form-row">
        <div class="form-group col-md-6">
          <label for="inputEmail">Email</label>
-         <input name="email" type="email" class="form-control" id="inputEmail">
-         <small class="text-danger"><%= (typeof errors != 'undefined' && errors.email)?errors.email.msg: "" %> </small>
+         <input name="emailLogin" type="email" class="form-control" id="inputEmail">
+         <small class="text-danger"><%= (typeof errors != 'undefined' && errors.emailLogin)?errors.emailLogin.msg: "" %> </small>
        </div>
        
          <div class="form-group col-md-6">
@@ -34,7 +34,12 @@
       </div>
 
     </div>
-
+    <div>
+      
+        
+        
+    </div>
+    
     <!--REGISTRO-->
     <div class="container py-5">
       <div class="row">
@@ -47,18 +52,22 @@
        <div class="form-group col-md-6">
          <label for="email">Email</label>
          <input type="email" class="form-control" name="email">
+         <small style="color: red; list-style: circle;"><%- typeof errors.email == 'undefined' ? '' : errors.email.msg %> </small>
        </div>
         <div class="form-group col-md-6">
           <label for="password">Contraseña</label>
           <input type="password" class="form-control" name="password" >
+          <small style="color: red; list-style: circle;"><%- typeof errors.password == 'undefined' ? '' : errors.password.msg %> </small>
         </div>
         <div class="form-group col-md-6">
           <label for="nombre">Nombre</label>
           <input type="text" class="form-control" name="nombre">
+          <small style="color: red; list-style: circle;"><%- typeof errors.nombre == 'undefined' ? '' : errors.nombre.msg %> </small>
         </div>
         <div class="form-group col-md-6">
           <label for="apellido">Apellido</label>
           <input type="text" class="form-control" name="apellido" >
+          <small style="color: red; list-style: circle;"><%- typeof errors.apellido == 'undefined' ? '' : errors.apellido.msg %> </small>
         </div>
         <div class="form-group col-md-6">
           <label for="direccion">Direccion</label>

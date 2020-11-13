@@ -11,47 +11,47 @@
 
   <!--DETALLE DEL PRODUCTO-->
   <!--titulo-->
-  <section class="container-fluid">
+  <section class="container-fluid productDetail">
     <div class="row">
       <div class="col-12 col-md-12">
-        <h2>Titulo del producto</h2>
+        <h2>Detalle del producto</h2>
       </div>
     </div>
     <!--imagen del producto-->
     <div class="row">
-      <div class="col-12 col-md-8 col-lg-6">
-        <a href=""><img src="/images/<%- producto.imagen%>" width="100%" height="100%" alt=" " ></a>
+      <div class="col-12 col-md-8 col-lg-6 ">
+
+        <div class="imgContainer">
+          <img src="/images/<%- producto.imagen%>" width="100%" height="100%" alt=" " >
+        </div>
       </div>
-      <div class="col-12">
-        <p>NOMBRE DEL PRODUCTO
-          <%= producto.nombre%>
-        </p>
-      </div>
-      <div class="col-12">
-        <p><%= producto.price%></p>
-      </div>
+     <div class="col-12 col-md-12 col-lg-6 detalles">
+        <div class="col-12">
+          <p>
+            <%= producto.nombre%>
+          </p>
+        </div>
+        <div class="col-12">
+          <p> $ <%= producto.precio%></p>
+        </div>
+        <!--descripcion del producto-->
+        <div class="row">
+          <div class="col-12">
+            <h3>Descripcion del Producto</h3>
+            <p>
+              <%= producto.descripcion%>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 btn">
+            <button type="submit">Agregar al Carrito</button>
+          </div>
+        </div>
+     </div>
     </div>
     <!--buttons-->
-    <div class="row">
-      <div class="col-6">
-        <form>
-          <label for="cantidad">Cantidad</label>
-          <input type="number" name="cantidad">
-        </form>
-      </div>
-      <div class="col-6">
-        <button type="submit">Agregar al Carrito</button>
-      </div>
-    </div>
-    <!--descripcion del producto-->
-    <div class="row">
-      <div class="col-12">
-        <h3>Descripcion del Producto</h3>
-        <p>
-          <%= producto.descripcion%>
-        </p>
-      </div>
-    </div>
+    
     
   
   </section>

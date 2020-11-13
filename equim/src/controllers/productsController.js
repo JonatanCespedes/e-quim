@@ -1,9 +1,5 @@
-const dbproductos = require('../data/productos.json');
-const dbProducts = require('../data/dbProductos');
 const fs = require('fs');
 const path = require('path');
-
-
 
 const db = require("../database/models");
 const { where } = require('sequelize');
@@ -13,11 +9,32 @@ const productsController = {
         db.Products.findAll()
          .then(productos => {
             res.render('products',{
-     title:"Todos los productos",
-     productos:productos
+            title:"Todos los productos",
+            productos:productos
          })
          })
  },
+ category: function(req,res){
+     let id = req.params.id;
+
+     db.Categories.findByPk(id)
+     .then(categoria=>{
+        db.Products.findAll({
+            where:{
+                id_categoria: id
+            }
+        })
+        .then(productos=>{
+            res.render('products',{
+                title: categoria.nombre,
+                productos: productos
+            })
+        })
+     })   
+
+     
+ },
+
     productsDetail: function (req, res) {
         db.Products.findOne({
             where:{
@@ -37,7 +54,7 @@ const productsController = {
        db.Categories.findAll()
         .then(categorias => {
            res.render('productAdd',{
-                title:"agregar producto",
+                title:"Agregar producto",
                 categorias:categorias
            })
         })
@@ -56,7 +73,7 @@ add: function(req,res){
      
       .then(categorias => {
          res.render('productAdd',{
-              title:"agregar producto",
+              title:"Agregar producto",
               categorias:categorias
          })
       })
@@ -78,19 +95,20 @@ show :function (req,res) {      //pasar a sequelize 3
         Promise.all([producto,categorias])
         .then(([producto,categorias])=> {
            res.render('editarProducto',{
-                title:"ver / Editar producto",
+                title:"Ver / Editar producto",
                 categorias:categorias,
                 producto:producto
             })
         })
  },
     edit :function(req,res){
+
+    
     console.log(req.body)
         db.Products.update({ 
             nombre:req.body.nombre.trim(),
             precio:Number(req.body.precio),
             descripcion:req.body.descripcion,
-            imagen : req.files[0].filename,
             id_categoria:Number(req.body.category),
         },
         { 
@@ -104,7 +122,22 @@ show :function (req,res) {      //pasar a sequelize 3
         .catch(error =>{
             res.send(error)
         })  
-    }
+    },
+    delete :function(req,res){
+        
+        db.Products.destroy(
+       { where:{
+        id:req.params.id
+        }
+    })
+    .then(() => {
+        res.redirect('/')
+    })
+    .catch(error =>{
+        res.send(error)
+    })  
+   },
+   
 }
     
 module.exports = productsController;

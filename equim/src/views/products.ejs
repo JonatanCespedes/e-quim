@@ -16,12 +16,12 @@
                             <div class="col-12 col-md-6 col-lg-3">
                                 <div class="contenido">
                                     <figure>
-                                        <a href="./products/productDetail/<%= producto.id %> "><img src="/images/<%= producto.imagen %>" width="100%" height="100%" alt=" " >
+                                        <a href="/products/productDetail/<%= producto.id %> "><img src="/images/<%= producto.imagen %>" width="100%" height="100%" alt=" " >
                                 </a>
                                     </figure>
                                     <article>
                                         <h2>
-                                            <%- (producto.precio) %>
+                                           $ <%- (producto.precio) %>
                                         </h2>
                                                 <p>
                                                     <%- producto.nombre %>

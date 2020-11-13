@@ -44,12 +44,12 @@
               </div>
               <!--icono usuario-->
               
-              <div class="col-1 ">
+              <div class="col-3 col-md-1 usuario">
                 
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     
-                    <i class="fa fa-user" style="color: #00afef;">
+                    <i class="fa fa-user" style="color: #00afef;" id="usuario">
                       <%= (locals.user)?locals.user.nick:"Invitado" %>
                     </i>
                   </a>
@@ -70,7 +70,7 @@
                           
                         <div class="dropdown-divider"></div>
 
-                            <a class="dropdown-item" href="/products">Editar/Eliminar productos</a>
+                            <a class="dropdown-item" href="/">Editar/Eliminar productos</a>
                             
         
                         <div class="dropdown-divider"></div>
@@ -87,7 +87,7 @@
                 </div>
             </div>
               <!--hamburgesa-->
-            <nav class="navbar-expand-md">
+            <nav class="navbar-expand-md hamburguesa">
                 <button
                   class="navbar-toggler burger"
                   type="button"
@@ -100,11 +100,11 @@
                 </button>
                 <!--menu-->
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="menu navbar-nav mr-auto">
-                      <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA BAÑO</a></li>
-                      <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA COCINA</a></li>
-                      <li class="col-12 col-md-3"><a href="/products">PRODUCTOS PARA PISO</a></li>
-                      <li class="col-12 col-md-3"><a href="/products">PRODUCTOS VARIOS</a></li>
+                    <ul class="menu navbar-nav mr-auto desplegableBurguer">
+                      <li class="col-12 col-md-3"><a href="/products/category/2">PRODUCTOS PARA BAÑO</a></li>
+                      <li class="col-12 col-md-3"><a href="/products/category/3">PRODUCTOS PARA COCINA</a></li>
+                      <li class="col-12 col-md-3"><a href="/products/category/1">PRODUCTOS PARA PISO</a></li>
+                      <li class="col-12 col-md-3"><a href="/products/category/4">PRODUCTOS VARIOS</a></li>
                     </ul>
                   </div>
               </nav>
