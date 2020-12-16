@@ -128,3 +128,20 @@ footer a{
 .productDetail .detalles .btn{
   text-align: center;
 }
+
+/* Carga de producto */
+
+.formulario{
+  text-align: center;
+}
+
+.formulario small#errorImage{
+  display: block;
+  margin: 10px;
+}
+
+.formulario .botones{
+  margin: 10px;
+  display: inline;
+  text-align: center;
+}

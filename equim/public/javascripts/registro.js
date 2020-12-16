@@ -9,6 +9,8 @@ window.addEventListener('load', () => {
     let inputPassword2 = document.getElementById('inputPassword2');
     let inputNombre = document.getElementById('inputNombre');
     let inputApellido = document.getElementById('inputApellido');
+    let form = document.getElementById('form');
+    let formLogin = document.getElementById('formLogin')
 
     let regExEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let regExPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
@@ -162,11 +164,40 @@ window.addEventListener('load', () => {
     inputApellido.addEventListener('blur', () => {
         apellidoValidator();
     })
+
     inputApellido.addEventListener('keyup', () => {
         apellidoValidator()
     })
-    
+            
+    form.addEventListener('submit', function(event){
+        let error = false;
+        event.preventDefault()
 
-    
+        let elementosForm = form.elements
 
+        for(let index = 0; index < elementosForm.length-1; index++) {
+            if(elementosForm[index].value == ""){
+                elementosForm[index].classList.add('is-invalid');
+                error = true
+            }else{
+                form.submit()
+            }   
+        }
+    })
+
+    formLogin.addEventListener('submit', function(event){
+        let error = false;
+        event.preventDefault()
+
+        let elementosForm = formLogin.elements
+
+        for (let index = 0; index < elementosForm.length-1; index++) {
+            if(elementosForm[index].value == ""){
+                elementosForm[index].classList.add('is-invalid');
+                error = true
+            }else{
+                formLogin.submit()
+            }  
+        }
+    })
 })

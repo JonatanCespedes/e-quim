@@ -4,9 +4,9 @@
 <%- include('partials/head') %> 
 <body>
   <!--EMPIEZA EL HEADER-->
-
-<%- include('partials/header') %> 
-
+  
+  <%- include('partials/header') %> 
+  
   <!--EMPIEZA EL FORMULARIO DE CARGA DE PRODUCTOS-->
   <section class="container-fluid">
     <div class="row">
@@ -16,51 +16,63 @@
       <div class="col-12">
         <article>
           <form class="col-12 col-md-12" action="/products/agregarProducto" method="POST" enctype="multipart/form-data">
+           
+            <div class="formulario"> 
+
             <div class= "form-group">
               <label for="name">Nombre:</label>
               <input type="text" name="nombre">
             </div>
+
             <div class= "form-group">
               <label for="category">Categoria:</label>
               <select name="category" id="categorySelect">
                 <option hidden selected value="0" >Elija una Categoria</option>
-               <% categorias.forEach(categoria => { %>
-                <option value="<%= categoria.id %>"<% if(typeof oldAdd != 'undefined' && oldAdd.categoria){%> selected <% } %>><%= categoria.nombre %> </option>
-               <% }) %>
-            </select>
+                <% categorias.forEach(categoria => { %>
+                  <option value="<%= categoria.id %>"<% if(typeof oldAdd != 'undefined' && oldAdd.categoria){%> selected <% } %>><%= categoria.nombre %> </option>
+                  <% }) %>
+                </select>
+              </div>
 
-
-            </div>
-            <div class= "form-group">
-              <label for="price">Precio:</label>
-              <input type="text" name="precio">
-            </div>
-            <div class= "form-group">
-              <label for="decription">Descripcion:</label>
-              <textarea cols="" rows="" name="descripcion"></textarea>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-12 col-xl-6">
+              <div class= "form-group">
+                <label for="price">Precio:</label>
+                <input type="text" name="precio">
+              </div>
+              
+              <div class= "form-group">
+                <label for="decription">Descripcion:</label>
+                <textarea cols="" rows="" name="descripcion"></textarea>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group col-12 col-xl-6">
               </div> 
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input " id="imagen" lang="en" name="imagen">
-                    <label class="custom-file-label" for="customFileLang">Seleccione Imagenes</label>
-                    <small id="errorImagen" class="text-danger"><%= (typeof errors != 'undefined' && errors.imagen)?errors.imagen.msg: "" %> </small>
+                
+              <div class="custom-file">
+                <small class="text-danger" id="errorImage">Error</small>
+                  <input type="file"  id="imagen" lang="en" name="imagen">
+                  <label  for="customFileLang">Seleccione Imagenes</label>
+                  <small id="errorImagen" class="text-danger"><%= (typeof errors != 'undefined' && errors.imagen)?errors.imagen.msg: "" %> </small>
                   
-                </div>
-            <div class= "form-group">
-              <button type="submit">AGREGAR NUEVO PRODUCTO</button>
-              <button type="reset">LIMPIAR CAMPOS</button>
+              </div>
+
+              <div class= " botones">
+                  <button type="submit">AGREGAR NUEVO PRODUCTO</button>
+                  <button type="reset">LIMPIAR CAMPOS</button>
+              </div>
             </div>
+
+          </div>
+          
           </form>
-        </article>
-      </div>
-    <!--TERMINA EL FORMULARIO-->
-  </section>
-  <!--TERMINA EL FORMLARIO DE CARGA DE PRODUCTOS-->
-
-  <!--EMPIEZA EL FOOTER-->
-<%- include('partials/footer') %> 
-
-</body>
-</html>
+            </article>
+          </div>
+          <!--TERMINA EL FORMULARIO-->
+        </section>
+        <!--TERMINA EL FORMLARIO DE CARGA DE PRODUCTOS-->
+        
+        <!--EMPIEZA EL FOOTER-->
+        <%- include('partials/footer') %> 
+        
+      </body>
+      </html>
